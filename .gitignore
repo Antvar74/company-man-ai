@@ -139,3 +139,5 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 # Ignorar llaves de servicio y secretos
 scripts/serviceAccountKey.json
+# Archivos de sistema de macOS
+.DS_Store

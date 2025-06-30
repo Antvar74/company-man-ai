@@ -21,7 +21,7 @@ export default function HomePage() {
 
         {/* Botón de Entrada */}
         <Link 
-          href="/calculators" 
+          href="/dashboard" 
           className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105"
         >
           Entrar
