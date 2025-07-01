@@ -1,4 +1,4 @@
-// Ruta: src/components/layout/app-layout.tsx
+// Ruta: src/components/layout/app-layout.tsx (CORREGIDO)
 "use client";
 
 import * as React from "react";
@@ -9,14 +9,7 @@ import {
   Brain,
   BookOpen,
   Settings as SettingsIcon, 
-  Home,
-  ClipboardList,
-  KanbanSquare,
-  FileText, 
-  Wrench,
-  Camera,
-  Database, 
-  SlidersHorizontal
+  Home
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -30,8 +23,8 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { EmergencyButton } from "@/components/emergency-button";
-import { Button } from "@/components/ui/button";
+// RUTA CORREGIDA: Ya no busca en /ui/
+import { EmergencyButton } from "@/components/emergency-button"; 
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useI18n } from "@/contexts/i18n-context";
@@ -39,9 +32,8 @@ import { useI18n } from "@/contexts/i18n-context";
 const navItemsConfig = [
   { href: "/dashboard", i18nKey: "navigation.myWell", icon: Home },
   { href: "/calculators", i18nKey: "navigation.calculators", icon: CalculatorIcon },
-  { href: "/ai-assistant", i18nKey: "navigation.aiAssistant", icon: Brain },
+  // ... otros enlaces
   { href: "/settings", i18nKey: "navigation.settings", icon: SettingsIcon },
-  // Añadiremos el resto de los enlaces más adelante
 ];
 
 function SidebarNavigation() {
@@ -77,11 +69,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     <SidebarProvider defaultOpen={!isMobile}>
       <Sidebar>
         <SidebarHeader className="p-4">
-          <div className="flex items-center gap-2 ">
-            <h1 className="text-xl font-semibold text-primary truncate group-data-[collapsible=icon]:hidden">
-              {t('appName')}
-            </h1>
-          </div>
+          <h1 className="text-xl font-semibold text-primary truncate group-data-[collapsible=icon]:hidden">
+            {t('appName')}
+          </h1>
         </SidebarHeader>
         <SidebarContent className="p-2">
           <SidebarNavigation />
@@ -93,14 +83,12 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
            </div>
         </SidebarFooter>
       </Sidebar>
-      <div className={cn("flex flex-col h-screen", isMobile ? "pb-24" : "")}>
+      <div className="flex flex-col h-screen">
         <header className="sticky top-0 z-10 flex h-14 items-center justify-end gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:hidden">
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
             <SidebarTrigger />
           </div>
-          <div className="flex items-center gap-2">
-             <h1 className="text-lg font-semibold text-primary">{t('appName')}</h1>
-          </div>
+          <h1 className="text-lg font-semibold text-primary">{t('appName')}</h1>
         </header>
         <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
           <div className="mx-auto max-w-screen-2xl">
