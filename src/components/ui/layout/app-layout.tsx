@@ -36,25 +36,25 @@ import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useI18n } from "@/contexts/i18n-context";
 
-const desktopNavItemsConfig = [
+const navItemsConfig = [
   { href: "/dashboard", i18nKey: "navigation.myWell", icon: Home },
   { href: "/calculators", i18nKey: "navigation.calculators", icon: CalculatorIcon },
   { href: "/ai-assistant", i18nKey: "navigation.aiAssistant", icon: Brain },
-  // ... (podemos añadir el resto de los enlaces después)
   { href: "/settings", i18nKey: "navigation.settings", icon: SettingsIcon },
+  // Añadiremos el resto de los enlaces más adelante
 ];
 
-function DesktopSidebarNavigation() {
+function SidebarNavigation() {
   const pathname = usePathname();
   const { t } = useI18n(); 
 
   return (
     <SidebarMenu>
-      {desktopNavItemsConfig.map((item) => (
+      {navItemsConfig.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton
             asChild
-            isActive={pathname === item.href}
+            isActive={pathname.startsWith(item.href)}
             tooltip={{ children: t(item.i18nKey) }}
             className="justify-start"
           >
@@ -78,14 +78,13 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <Sidebar>
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-2 ">
-            {/* Aquí podríamos poner el logo pequeño en el futuro */}
             <h1 className="text-xl font-semibold text-primary truncate group-data-[collapsible=icon]:hidden">
               {t('appName')}
             </h1>
           </div>
         </SidebarHeader>
         <SidebarContent className="p-2">
-          <DesktopSidebarNavigation />
+          <SidebarNavigation />
         </SidebarContent>
         <SidebarFooter className="p-2 mt-auto"> 
            <Separator className="my-2"/>
@@ -94,7 +93,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
            </div>
         </SidebarFooter>
       </Sidebar>
-      <div className={cn("flex flex-col h-full", isMobile ? "pb-24" : "")}>
+      <div className={cn("flex flex-col h-screen", isMobile ? "pb-24" : "")}>
         <header className="sticky top-0 z-10 flex h-14 items-center justify-end gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:hidden">
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
             <SidebarTrigger />
